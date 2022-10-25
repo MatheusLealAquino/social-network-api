@@ -1,0 +1,33 @@
+version: '3.1'
+
+services:
+  api:
+    container_name: social_network_api
+    build: .
+    ports:
+      - "5000:3000"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - DATABASE_TYPE=mysql
+      - DATABASE_MYSQL_HOST=mysql
+      - DATABASE_MYSQL_PORT=3306
+      - DATABASE_MYSQL_USERNAME=root
+      - DATABASE_MYSQL_PASSWORD=mysql
+      - DATABASE_MYSQL_NAME=social_network
+    links:
+      - mysql
+  mysql:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_DATABASE: social_network
+    ports:
+      - 3308:3306
+    volumes:
+      - my-mysql-db:/var/lib/mysql
+
+volumes:
+  my-mysql-db: {}
