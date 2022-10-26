@@ -1,16 +1,43 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
 
 @Entity()
 export class User {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+    id: number
 
-    @Column()
-    firstName: string;
+  @Column()
+    firstName: string
 
-    @Column()
-    lastName: string;
+  @Column()
+    lastName: string
 
-    @Column()
-    birthday: Date;
+  @Column()
+    email: string
+
+  @Column()
+    password: string
+
+  @Column({ type: 'blob', nullable: true })
+    profileImage?: string
+
+  @Column({
+    type: 'enum',
+    enum: ['male', 'female']
+  })
+    gender: string
+
+  @Column({
+    type: 'enum',
+    enum: ['single', 'in_a_relationship', 'married', 'widower', 'widow']
+  })
+    relationshipStatus: string
+
+  @Column()
+    birthday: Date
+
+  @Column()
+    createdAt: Date
+
+  @Column()
+    updatedAt: Date
 }
