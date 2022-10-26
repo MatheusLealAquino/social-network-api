@@ -24,13 +24,13 @@ export class User {
     type: 'enum',
     enum: ['male', 'female']
   })
-    gender: string
+    gender: 'male' | 'female'
 
   @Column({
     type: 'enum',
     enum: ['single', 'in_a_relationship', 'married', 'widower', 'widow']
   })
-    relationshipStatus: string
+    relationshipStatus: 'single' | 'in_a_relationship' | 'married' | 'widower' | 'widow'
 
   @Column()
     birthday: Date
