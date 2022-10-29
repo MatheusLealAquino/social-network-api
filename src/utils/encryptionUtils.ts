@@ -9,8 +9,8 @@ export function verifyHash ({ password, hash }: { password: string, hash: string
   return bcrypt.compareSync(password, hash)
 }
 
-export async function generateCookie ({ key, value }: { key: string, value: string }): Promise<string> {
-  const data: { [key: string]: string } = {}
+export async function generateCookie ({ key, value }: { key: string, value: string | number }): Promise<string> {
+  const data: { [key: string]: string | number } = {}
   data[key] = value
   return jwt.sign({ data }, process.env.JWT_SECRET, {
     expiresIn: process.env.USER_COOKIE_EXPIRY
