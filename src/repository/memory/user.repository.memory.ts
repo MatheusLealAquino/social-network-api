@@ -11,6 +11,10 @@ export default class userRepositoryMemory {
     return this.userRepository.find(user => user.id === id)
   }
 
+  async findOneEmail (email: string): Promise<User | null> {
+    return this.userRepository.find(user => user.email === email)
+  }
+
   async save (user: User): Promise<User> {
     user.id = new Date().getTime()
     user.createdAt = new Date()

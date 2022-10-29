@@ -1,7 +1,7 @@
 import { User } from '../entity/user.entity'
 import IUserRepository from '../types/repository/IUserRepository'
 
-import { generateHash } from '../utils/encryptionUtils'
+import { generateHash, verifyHash } from '../utils/encryptionUtils'
 
 export default class UserService {
   userRepository: IUserRepository
@@ -32,5 +32,14 @@ export default class UserService {
     user.updatedAt = new Date()
 
     return await this.userRepository.save(user)
+  }
+
+  async login ({ email, password }: { email: string, password: string }): Promise<User> {
+    const foundUser = await this.userRepository.findOneByEmail(email)
+    if (!foundUser) return null
+
+    const verifyHashOutput = verifyHash({ password, hash: foundUser.password })
+    if (verifyHashOutput) return foundUser
+    return null
   }
 }
