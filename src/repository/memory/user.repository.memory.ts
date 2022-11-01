@@ -11,7 +11,7 @@ export default class userRepositoryMemory {
     return this.userRepository.find(user => user.id === id)
   }
 
-  async findOneEmail (email: string): Promise<User | null> {
+  async findOneByEmail (email: string): Promise<User | null> {
     return this.userRepository.find(user => user.email === email)
   }
 

@@ -14,7 +14,7 @@ export default class UserRepositoryMysql {
     return await this.userRepository.findOneBy({ id })
   }
 
-  async findOneEmail (email: string): Promise<User | null> {
+  async findOneByEmail (email: string): Promise<User | null> {
     return await this.userRepository.findOneBy({ email })
   }
 
