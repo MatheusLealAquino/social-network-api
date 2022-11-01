@@ -6,8 +6,10 @@ import { User } from '../entity/user.entity'
 
 import UserService from './user.service'
 
+let userRepositoryMysql: UserRepositoryMysql
 beforeAll(async () => {
   await AppDataSource.initialize()
+  userRepositoryMysql = new UserRepositoryMysql()
 })
 
 afterAll(async () => {
@@ -18,8 +20,6 @@ afterAll(async () => {
 
 describe('createUser', () => {
   test('when receive correctly data then save', async () => {
-    const userRepositoryMysql = new UserRepositoryMysql()
-
     const userService = new UserService({
       userRepository: userRepositoryMysql
     })
