@@ -19,6 +19,9 @@ export default class UserService {
     relationshipStatus,
     birthday
   }: Omit<User, 'createdAt' | 'updatedAt' | 'id'>): Promise<User> {
+    const foundUser = await this.userRepository.findOneByEmail(email)
+    if (foundUser) throw new Error('Email already created')
+
     const user = new User()
 
     user.firstName = firstName
