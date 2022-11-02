@@ -2,13 +2,6 @@
 import { Response } from 'express'
 import httpStatusCodes from 'http-status-codes'
 
-export interface IOverrideRequest {
-  code: number
-  message: string
-  positive: string
-  negative: string
-}
-
 export interface ICookie {
   key: string
   value: string
@@ -35,13 +28,11 @@ export default class ApiResponse {
     res,
     status = 400,
     error = httpStatusCodes.getStatusText(status),
-    override = null,
     internalError = null
   }: {
     res: Response
     status: number
     error: string
-    override: IOverrideRequest
     internalError: Error
   }) => {
     if (internalError) {
@@ -49,7 +40,6 @@ export default class ApiResponse {
     }
 
     return res.status(status).json({
-      override,
       error: {
         message: error
       },
