@@ -10,7 +10,7 @@ import UserService from '../services/user.service'
 import apiResponse from '../utils/apiResponse'
 
 export default class UserController {
-  userService: UserService
+  private readonly userService: UserService
 
   constructor ({ userRepository }) {
     this.userService = new UserService({ userRepository })
@@ -19,8 +19,8 @@ export default class UserController {
   async signup (req, res): Promise<IController> {
     try {
       const {
-        birthday,
         email,
+        birthday,
         firstName,
         lastName,
         gender,
