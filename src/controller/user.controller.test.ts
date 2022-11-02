@@ -4,7 +4,7 @@ import UserRepositoryMysql from '../repository/mysql/user.repository.mysql'
 
 import { User } from '../entity/user.entity'
 
-import UserController from './user.controllers'
+import UserController from './user.controller'
 
 const res = {
   cookie: () => ({}),
