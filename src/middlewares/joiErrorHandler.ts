@@ -16,6 +16,7 @@ export default (
       error1.details.forEach((value) => details.push(value.message))
     )
     const error = {
+      success: false,
       details: details.join(','),
       code: httpStatusCodes.BAD_REQUEST,
       message: httpStatusCodes.getStatusText(httpStatusCodes.BAD_REQUEST)
