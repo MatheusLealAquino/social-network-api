@@ -12,9 +12,12 @@ beforeAll(async () => {
   userRepositoryMysql = new UserRepositoryMysql()
 })
 
-afterAll(async () => {
+afterEach(async () => {
   const userRepository = AppDataSource.getRepository(User)
   await userRepository.clear()
+})
+
+afterAll(async () => {
   await AppDataSource.destroy()
 })
 
