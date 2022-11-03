@@ -47,6 +47,15 @@ export default class UserController {
 
       return apiResponse.result(res, responseUser, httpStatusCodes.OK)
     } catch (err) {
+      if (err.message === 'Email already created') {
+        return apiResponse.error({
+          res,
+          status: httpStatusCodes.INTERNAL_SERVER_ERROR,
+          error: 'Email already created',
+          internalError: err
+        })
+      }
+
       return apiResponse.error({
         res,
         status: httpStatusCodes.BAD_REQUEST,
