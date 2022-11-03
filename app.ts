@@ -1,13 +1,20 @@
 import 'reflect-metadata'
 import express from 'express'
-import { AppDataSource } from './src/data-source'
+import * as bodyParser from 'body-parser'
+
+import joiErrorHandler from './src/middlewares/joiErrorHandler'
+import * as errorHandler from './src/middlewares/apiErrorHandler'
+
+import routes from './src/routes'
 
 const app = express()
-const port = 3000
 
-AppDataSource.initialize().then(async () => {
-  console.log('connection to database')
-  app.listen(port, () => {
-    console.log(`App listening on port ${port}`)
-  })
-}).catch(error => console.log(error))
+app.use(bodyParser.json())
+
+app.use('/v1', routes)
+
+app.use(joiErrorHandler)
+app.use(errorHandler.notFoundErrorHandler)
+app.use(errorHandler.errorHandler)
+
+export default app
