@@ -45,4 +45,8 @@ export default class UserService {
     if (verifyHashOutput) return foundUser
     return null
   }
+
+  async findById ({ id }: { id: number }): Promise<User> {
+    return await this.userRepository.findOne(id)
+  }
 }
