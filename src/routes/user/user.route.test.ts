@@ -71,3 +71,39 @@ describe('Register user', () => {
     expect(body.error.message).toBe('Email already created')
   })
 })
+
+describe('Login user', () => {
+  test('when body is invalid then return error', async () => {
+    const { body, status } = await request(app).post('/v1/user/login')
+
+    expect(status).toBe(400)
+    expect(body.success).toBeFalsy()
+    expect(body.details).toBe('"email" is required')
+    expect(body.message).toBe('Bad Request')
+  })
+
+  test('when body is valid then return token', async () => {
+    await request(app)
+      .post('/v1/user/register')
+      .send({
+        birthday: new Date(),
+        email: 'matheusleal.a@gmail.com',
+        firstName: 'Matheus',
+        lastName: 'Leal',
+        gender: 'male',
+        password: '123456',
+        relationshipStatus: 'married'
+      })
+
+    const { status, body } = await request(app)
+      .post('/v1/user/login')
+      .send({
+        email: 'matheusleal.a@gmail.com',
+        password: '123456'
+      })
+
+    expect(status).toBe(200)
+    expect(body.success).toBeTruthy()
+    expect(body.data.token).toBeDefined()
+  })
+})
