@@ -11,13 +11,8 @@ export default class ApiResponse {
   static result: any = (
     res: Response,
     data: object,
-    status: number = 200,
-    cookie: ICookie = null
+    status: number = 200
   ) => {
-    if (cookie) {
-      res.cookie(cookie.key, cookie.value)
-    }
-
     return res.status(status).json({
       data,
       success: true
