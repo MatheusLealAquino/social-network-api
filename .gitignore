@@ -6,3 +6,5 @@ tmp/
 temp/
 
 docker-compose.yml
+
+.DS_Store

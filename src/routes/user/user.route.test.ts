@@ -21,7 +21,7 @@ afterAll(async () => {
 
 describe('Register user', () => {
   test('when body is invalid then return error', async () => {
-    const { body, status } = await request(app).post('/v1/user/register')
+    const { body, status } = await request(app).post('/v1/user')
 
     expect(status).toBe(400)
     expect(body.success).toBeFalsy()
@@ -31,7 +31,7 @@ describe('Register user', () => {
 
   test('when body is valid then create user', async () => {
     const { status, body } = await request(app)
-      .post('/v1/user/register')
+      .post('/v1/user')
       .send({
         birthday: new Date(),
         email: 'matheusleal.a@gmail.com',
@@ -59,11 +59,11 @@ describe('Register user', () => {
     }
 
     await request(app)
-      .post('/v1/user/register')
+      .post('/v1/user')
       .send(bodyRequest)
 
     const { status, body } = await request(app)
-      .post('/v1/user/register')
+      .post('/v1/user')
       .send(bodyRequest)
 
     expect(status).toBe(500)
@@ -84,7 +84,7 @@ describe('Login user', () => {
 
   test('when body is valid then return token', async () => {
     await request(app)
-      .post('/v1/user/register')
+      .post('/v1/user')
       .send({
         birthday: new Date(),
         email: 'matheusleal.a@gmail.com',

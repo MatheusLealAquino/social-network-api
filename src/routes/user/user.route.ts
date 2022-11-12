@@ -24,7 +24,7 @@ export default class UserRouter {
 
   private registerRoute (): void {
     this.router.post(
-      '/register',
+      '/',
       celebrate({
         [Segments.BODY]: {
           email: Joi.string().email().required(),
