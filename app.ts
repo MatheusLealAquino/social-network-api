@@ -12,7 +12,9 @@ import routes from './src/routes'
 const app = express()
 
 morgan.token('body', req => {
-  return req?.body ? JSON.stringify(req.body) : ''
+  const parsedBody = req?.body || {}
+  if (parsedBody.password) delete parsedBody.password
+  return JSON.stringify(parsedBody)
 })
 
 app.use(bodyParser.json())
