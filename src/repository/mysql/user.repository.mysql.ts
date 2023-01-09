@@ -3,7 +3,9 @@ import { Repository } from 'typeorm'
 import { AppDataSource } from '../../data-source'
 import { User } from '../../entity/user.entity'
 
-export default class UserRepositoryMysql {
+import IUserRepository from '../../types/repository/IUserRepository'
+
+export default class UserRepositoryMysql implements IUserRepository {
   userRepository: Repository<User>
 
   constructor () {

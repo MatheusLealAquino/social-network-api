@@ -1,6 +1,8 @@
 import { User } from '../../entity/user.entity'
 
-export default class userRepositoryMemory {
+import IUserRepository from '../../types/repository/IUserRepository'
+
+export default class userRepositoryMemory implements IUserRepository {
   userRepository: User[]
 
   constructor () {
