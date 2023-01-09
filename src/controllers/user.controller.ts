@@ -82,7 +82,8 @@ export default class UserController {
         return apiResponse.result(
           res,
           {
-            token: cookie
+            token: cookie,
+            userId: outputUser.id
           },
           httpStatusCodes.OK,
           cookie
